@@ -1,0 +1,16 @@
+{
+  "name": "@workspace/docs",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress dev --port $PORT --host 0.0.0.0",
+    "build": "vitepress build",
+    "serve": "vitepress preview --port $PORT --host 0.0.0.0",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "vitepress": "^1.6.4"
+  }
+}

@@ -1,0 +1,317 @@
+:root {
+  --vp-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --vp-font-family-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+
+  /* Brand colors - teal/cyan accent */
+  --vp-c-brand-1: #0ea5e9;
+  --vp-c-brand-2: #38bdf8;
+  --vp-c-brand-3: #7dd3fc;
+  --vp-c-brand-soft: rgba(14, 165, 233, 0.14);
+
+  /* Layout */
+  --vp-layout-max-width: 1440px;
+}
+
+/* ==================== DARK MODE ==================== */
+.dark {
+  --vp-c-bg: #0d1117;
+  --vp-c-bg-soft: #161b22;
+  --vp-c-bg-mute: #21262d;
+  --vp-c-bg-alt: #0d1117;
+
+  --vp-c-border: #30363d;
+  --vp-c-divider: #21262d;
+
+  --vp-c-text-1: #e6edf3;
+  --vp-c-text-2: #8b949e;
+  --vp-c-text-3: #6e7681;
+
+  /* Brand */
+  --vp-c-brand-1: #2dd4bf;
+  --vp-c-brand-2: #5eead4;
+  --vp-c-brand-3: #99f6e4;
+  --vp-c-brand-soft: rgba(45, 212, 191, 0.14);
+
+  /* Sidebar */
+  --vp-sidebar-bg-color: #0d1117;
+
+  /* Nav */
+  --vp-nav-bg-color: rgba(13, 17, 23, 0.95);
+
+  /* Code */
+  --vp-code-bg: #161b22;
+  --vp-code-color: #f0abfc;
+}
+
+/* ==================== LIGHT MODE ==================== */
+:root:not(.dark) {
+  --vp-c-bg: #ffffff;
+  --vp-c-bg-soft: #f6f8fa;
+  --vp-c-bg-mute: #f0f2f5;
+  --vp-c-bg-alt: #f6f8fa;
+
+  --vp-c-border: #d0d7de;
+  --vp-c-divider: #d8dee4;
+
+  --vp-c-text-1: #1f2328;
+  --vp-c-text-2: #57606a;
+  --vp-c-text-3: #8c959f;
+
+  --vp-c-brand-1: #0284c7;
+  --vp-c-brand-2: #0ea5e9;
+  --vp-c-brand-3: #38bdf8;
+  --vp-c-brand-soft: rgba(2, 132, 199, 0.1);
+
+  --vp-sidebar-bg-color: #f6f8fa;
+  --vp-nav-bg-color: rgba(255, 255, 255, 0.95);
+}
+
+/* ==================== NAVBAR ==================== */
+.VPNavBar {
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--vp-c-border) !important;
+}
+
+.VPNavBar.has-sidebar .content {
+  background: transparent !important;
+}
+
+/* ==================== SIDEBAR ==================== */
+.VPSidebar {
+  border-right: 1px solid var(--vp-c-border) !important;
+}
+
+.VPSidebarItem.level-0 > .item > .text {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--vp-c-text-3);
+  padding-top: 16px;
+}
+
+.VPSidebarItem.level-1 > .item {
+  padding: 4px 12px;
+  border-radius: 8px;
+  margin: 2px 0;
+}
+
+.VPSidebarItem.level-1 > .item:hover {
+  background: var(--vp-c-bg-mute);
+}
+
+.VPSidebarItem.is-active > .item {
+  background: var(--vp-c-brand-soft) !important;
+}
+
+.VPSidebarItem.is-active > .item .link {
+  color: var(--vp-c-brand-1) !important;
+  font-weight: 600;
+}
+
+/* ==================== CONTENT ==================== */
+.VPDoc {
+  padding-top: 32px !important;
+}
+
+.vp-doc h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  background: linear-gradient(135deg, var(--vp-c-text-1) 60%, var(--vp-c-brand-1));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.vp-doc h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  border-top: 1px solid var(--vp-c-border);
+  padding-top: 28px;
+  margin-top: 40px;
+}
+
+.vp-doc h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.vp-doc p {
+  font-size: 0.975rem;
+  line-height: 1.75;
+  color: var(--vp-c-text-2);
+}
+
+.vp-doc a {
+  color: var(--vp-c-brand-1);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.vp-doc a:hover {
+  border-bottom-color: var(--vp-c-brand-1);
+}
+
+.vp-doc code {
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.875em;
+  padding: 3px 6px;
+  border-radius: 6px;
+  background: var(--vp-code-bg);
+  border: 1px solid var(--vp-c-border);
+}
+
+.vp-doc pre {
+  border: 1px solid var(--vp-c-border);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.dark .vp-doc pre {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* ==================== CUSTOM BLOCK ==================== */
+.vp-doc .tip,
+.vp-doc .warning,
+.vp-doc .danger,
+.vp-doc .info,
+.vp-doc .details {
+  border-radius: 10px;
+  border-left-width: 4px;
+}
+
+/* ==================== OUTLINE / TOC ==================== */
+.VPDocAside .outline-title {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--vp-c-text-3);
+}
+
+.outline-link {
+  font-size: 13px;
+  transition: color 0.2s;
+}
+
+.outline-link.active {
+  color: var(--vp-c-brand-1) !important;
+  font-weight: 600;
+}
+
+/* ==================== HOME PAGE ==================== */
+.VPHero .name {
+  font-size: 3rem !important;
+  line-height: 1.15 !important;
+  background: linear-gradient(135deg, var(--vp-c-brand-1), var(--vp-c-brand-3)) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+.VPHero .text {
+  font-size: 1.4rem !important;
+  font-weight: 400 !important;
+  color: var(--vp-c-text-2) !important;
+  max-width: 520px !important;
+}
+
+.VPHero .tagline {
+  font-size: 1rem !important;
+  color: var(--vp-c-text-3) !important;
+}
+
+.VPButton.brand {
+  background: var(--vp-c-brand-1) !important;
+  border-color: var(--vp-c-brand-1) !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  transition: opacity 0.2s, transform 0.2s !important;
+}
+
+.VPButton.brand:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+.VPButton.alt {
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+}
+
+/* ==================== FEATURES ==================== */
+.VPFeature {
+  border-radius: 12px !important;
+  border: 1px solid var(--vp-c-border) !important;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s !important;
+}
+
+.VPFeature:hover {
+  border-color: var(--vp-c-brand-1) !important;
+  box-shadow: 0 4px 20px var(--vp-c-brand-soft) !important;
+  transform: translateY(-2px);
+}
+
+.VPFeature .icon {
+  font-size: 2rem !important;
+}
+
+/* ==================== FOOTER ==================== */
+.VPFooter {
+  border-top: 1px solid var(--vp-c-border) !important;
+}
+
+/* ==================== TABLE ==================== */
+.vp-doc table {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--vp-c-border);
+}
+
+.vp-doc th {
+  background: var(--vp-c-bg-soft);
+  font-weight: 600;
+}
+
+/* ==================== SCROLLBAR ==================== */
+.dark ::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #30363d;
+  border-radius: 3px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #484f58;
+}
+
+/* ==================== SEARCH ==================== */
+.VPLocalSearchBox {
+  border-radius: 12px !important;
+  overflow: hidden;
+}
+
+/* ==================== MOBILE ==================== */
+@media (max-width: 768px) {
+  .VPHero .name {
+    font-size: 2rem !important;
+  }
+
+  .VPHero .text {
+    font-size: 1.1rem !important;
+  }
+}
