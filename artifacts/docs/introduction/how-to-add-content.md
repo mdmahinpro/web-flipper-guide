@@ -2,58 +2,47 @@
 
 This page explains how to add your markdown content to this documentation site.
 
-## Option 1: Replace Placeholder Files
+## Sidebar is Auto-Generated
 
-The simplest approach — just replace the placeholder `.md` files with your real content:
+The sidebar navigation is **automatically generated from the folder and file structure**. You do not need to edit any configuration file to add new pages — just create the file and restart the dev server.
 
-1. Navigate to the chapter folder (e.g. `artifacts/docs/chapter-1/`)
-2. Open the `.md` file you want to update
-3. Replace the placeholder text with your content
-4. The site will automatically rebuild and show your changes
+The sidebar reads the first `# Heading` from each `.md` file to use as the link label.
 
-## Option 2: Add New Sections
+## Adding a Section to an Existing Chapter
 
-To add a new section inside a chapter:
-
-1. Create a new `.md` file in the chapter folder
+1. Create a new `.md` file in the chapter folder:
    ```
    artifacts/docs/chapter-1/section-3.md
    ```
 
-2. Add the section to the sidebar in `.vitepress/config.ts`:
-   ```ts
-   {
-     text: 'Chapter 1: Foundations',
-     items: [
-       { text: 'Overview', link: '/chapter-1/' },
-       { text: 'Section 1.1', link: '/chapter-1/section-1' },
-       { text: 'Section 1.2', link: '/chapter-1/section-2' },
-       { text: 'Section 1.3', link: '/chapter-1/section-3' }, // ← new
-     ],
-   }
+2. Start the file with a heading — this becomes the sidebar label:
+   ```md
+   # Section 1.3 — My New Section
+
+   Content goes here...
    ```
 
-## Option 3: Add a New Chapter
+3. Restart the dev server. The new page appears automatically in the sidebar.
 
-To add a completely new chapter:
+## Adding a New Chapter
 
-1. Create a new folder:
+1. Create a new folder under `artifacts/docs/`:
    ```
    artifacts/docs/chapter-4/
    ```
 
-2. Create an `index.md` file inside it
+2. Create an `index.md` inside it:
+   ```md
+   # Chapter 4: Your New Chapter
 
-3. Add to the sidebar config in `.vitepress/config.ts`:
-   ```ts
-   {
-     text: 'Chapter 4: Your New Chapter',
-     collapsed: false,
-     items: [
-       { text: 'Overview', link: '/chapter-4/' },
-     ],
-   }
+   Overview content goes here.
    ```
+
+3. Restart the dev server. The chapter appears automatically in the sidebar.
+
+::: tip Folder naming
+Folders starting with `introduction` or `getting-started` appear first in the sidebar. Folders starting with `chapter-` are sorted numerically (chapter-1, chapter-2, ...). All other folders appear after, in alphabetical order.
+:::
 
 ## Markdown Features
 
@@ -93,7 +82,7 @@ Use warnings for important caveats.
 Use danger for critical information.
 :::
 
-### Code Blocks
+### Code Blocks with Syntax Highlighting
 
 ````md
 ```python
@@ -117,4 +106,4 @@ def hello_world():
 
 ## Providing Content in Bulk
 
-If you have a single large `.md` file (4000+ lines), you can provide it and we'll split it into the proper chapter/section structure automatically. Just paste it and describe how you'd like it organized.
+If you have a single large `.md` file (4000+ lines), you can provide it and we'll split it into the proper chapter/section structure. Just paste it and describe how you'd like it organized — the sidebar will build itself automatically from the file structure.
