@@ -45,9 +45,12 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 
 ## Adding Content to Docs
 
-To add content to the documentation site:
-1. Replace `.md` files in `artifacts/docs/chapter-*/`
-2. Update sidebar in `artifacts/docs/.vitepress/config.ts`
-3. See `artifacts/docs/introduction/how-to-add-content.md` for detailed instructions
+The sidebar is **auto-generated** from the file system — no config edits needed:
+1. Replace or create `.md` files in `artifacts/docs/chapter-*/` or create new chapter folders
+2. The sidebar reads H1 headings from each `.md` file automatically
+3. Restart the dev server to pick up new files
+4. See `artifacts/docs/introduction/how-to-add-content.md` for detailed instructions
+
+**Folder ordering**: `introduction/` → `getting-started/` → `chapter-N/` (numeric) → others
 
 See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and package details.
