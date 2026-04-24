@@ -25,7 +25,7 @@ const multiplier = computed(() => {
   <div class="calc-widget">
     <h4>💰 লাভ ক্যালকুলেটর — আপনার flip কতটা লাভজনক?</h4>
 
-    <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 16px;">
+    <div class="calc-grid calc-grid-inputs">
       <div class="calc-row">
         <div class="calc-label">ক্রয় মূল্য ($)</div>
         <input class="calc-input" type="number" v-model.number="buyPrice" min="1" />
@@ -40,16 +40,16 @@ const multiplier = computed(() => {
       </div>
     </div>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;">
-      <div class="calc-result" style="flex-direction: column; align-items: center; text-align: center;">
+    <div class="calc-grid calc-grid-results">
+      <div class="calc-result calc-result-stacked">
         <div class="calc-result-label">নিট লাভ</div>
         <div class="calc-result-value">${{ netProfit }}</div>
       </div>
-      <div class="calc-result" style="flex-direction: column; align-items: center; text-align: center;">
+      <div class="calc-result calc-result-stacked">
         <div class="calc-result-label">ROI</div>
         <div class="calc-result-value">{{ roi }}%</div>
       </div>
-      <div class="calc-result" style="flex-direction: column; align-items: center; text-align: center;">
+      <div class="calc-result calc-result-stacked">
         <div class="calc-result-label">গুণফল</div>
         <div class="calc-result-value">{{ multiplier }}×</div>
       </div>

@@ -806,7 +806,23 @@ body {
   align-items: center;
   gap: 8px;
 }
-.calc-row { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+.calc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+  width: 100%;
+  max-width: 100%;
+}
+.calc-grid-inputs  { margin-bottom: 16px; }
+.calc-grid-results { gap: 12px; }
+.calc-result-stacked {
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  min-width: 0;
+}
+.calc-row { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.calc-row .calc-input { min-width: 0; }
 .calc-label {
   font-size: 0.8rem; font-weight: 600;
   color: var(--vp-c-text-2);
@@ -919,11 +935,27 @@ body {
   .vp-doc h2 { font-size: 1.2rem !important; padding: 8px 0 8px 12px !important; }
 }
 
+@media (max-width: 640px) {
+  /* Profit Calculator: 2 up + 1 below (3rd item spans both columns) */
+  .calc-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+  }
+  .calc-grid > :nth-child(3) {
+    grid-column: 1 / -1;
+  }
+  .calc-result { padding: 12px 10px !important; }
+  .calc-result-label { font-size: 0.78rem !important; }
+  .calc-result-value { font-size: 1.25rem !important; word-break: break-all; }
+  .calc-input { font-size: 0.95rem !important; padding: 9px 10px !important; }
+  .calc-label { font-size: 0.72rem !important; }
+}
+
 @media (max-width: 480px) {
   .VPHero .actions { flex-direction: column; }
   .VPHero .action { width: 100%; }
   .stat-grid { grid-template-columns: 1fr 1fr; }
-  .calc-result-value { font-size: 1.3rem; }
+  .calc-result-value { font-size: 1.15rem !important; }
 }
 
 /* ==================== CONGRATULATIONS MODAL ==================== */
