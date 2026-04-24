@@ -202,7 +202,7 @@ export default defineConfig({
 
     footer: {
       message: 'ডোমেইন ফ্লিপিং মাস্টারক্লাস — ২০২৬ Edition',
-      copyright: 'শূন্য থেকে ডিজিটাল রিয়েল এস্টেট সাম্রাজ্য',
+      copyright: 'Made with ❤️ by <a href="https://techely.com" target="_blank" rel="noopener">Techely</a>',
     },
   },
 

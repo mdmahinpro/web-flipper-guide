@@ -9,6 +9,7 @@ import MarkDone from './MarkDone.vue'
 import ProgressWidget from './ProgressWidget.vue'
 import SidebarProgress from './SidebarProgress.vue'
 import CongratulationsModal from './CongratulationsModal.vue'
+import TechelyLogoMark from './TechelyLogoMark.vue'
 import { initProgress } from './useProgress'
 
 export default {
@@ -17,10 +18,11 @@ export default {
   Layout() {
     return h(DefaultTheme.Layout, null, {
       'nav-bar-content-after': () => h(ThemeSwitcher),
-      'doc-before': () => h(MarkDone),
-      'home-features-after': () => h(ProgressWidget),
-      'sidebar-nav-after': () => h(SidebarProgress),
-      'layout-bottom': () => h(CongratulationsModal),
+      'home-hero-image':       () => h(TechelyLogoMark, { size: 200 }),
+      'doc-before':            () => h(MarkDone),
+      'home-features-after':   () => h(ProgressWidget),
+      'sidebar-nav-after':     () => h(SidebarProgress),
+      'layout-bottom':         () => h(CongratulationsModal),
     })
   },
 
@@ -28,6 +30,7 @@ export default {
     app.component('ProfitCalculator', ProfitCalculator)
     app.component('DomainStats', DomainStats)
     app.component('DomainChecklist', DomainChecklist)
+    app.component('TechelyLogoMark', TechelyLogoMark)
 
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('df-theme') || 'cyan'
