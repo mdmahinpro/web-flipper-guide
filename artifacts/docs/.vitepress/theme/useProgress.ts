@@ -59,6 +59,7 @@ export function useProgress() {
     const empty = new Set<string>()
     completed.value = empty
     saveCompleted(empty)
+    localStorage.removeItem('df-congrats-shown')
     window.dispatchEvent(new Event('df-progress-change'))
   }
 
