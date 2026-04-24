@@ -652,6 +652,15 @@ body {
 .outline-link:hover { padding-left: 4px; color: var(--accent); }
 .outline-link.active { color: var(--accent) !important; font-weight: 600; }
 
+/* ==================== HERO VISUAL SWAP (desktop mascot vs mobile animation) ==================== */
+.home-hero-visual { width: 100%; }
+.home-hero-desktop { display: block; }
+.home-hero-mobile  { display: none; }
+@media (max-width: 768px) {
+  .home-hero-desktop { display: none !important; }
+  .home-hero-mobile  { display: block !important; }
+}
+
 /* ==================== HERO IMAGE SLOT (Techely mascot) ==================== */
 .VPHero .image-container {
   display: flex !important;

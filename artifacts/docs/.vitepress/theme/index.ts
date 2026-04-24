@@ -10,6 +10,7 @@ import ProgressWidget from './ProgressWidget.vue'
 import SidebarProgress from './SidebarProgress.vue'
 import CongratulationsModal from './CongratulationsModal.vue'
 import TechelyLogoMark from './TechelyLogoMark.vue'
+import MobileHeroAnimation from './MobileHeroAnimation.vue'
 import { initProgress } from './useProgress'
 
 export default {
@@ -18,7 +19,10 @@ export default {
   Layout() {
     return h(DefaultTheme.Layout, null, {
       'nav-bar-content-after': () => h(ThemeSwitcher),
-      'home-hero-image':       () => h(TechelyLogoMark, { size: 200 }),
+      'home-hero-image':       () => h('div', { class: 'home-hero-visual' }, [
+        h('div', { class: 'home-hero-desktop' }, [h(TechelyLogoMark, { size: 200 })]),
+        h('div', { class: 'home-hero-mobile' },  [h(MobileHeroAnimation)]),
+      ]),
       'doc-before':            () => h(MarkDone),
       'home-features-after':   () => h(ProgressWidget),
       'sidebar-nav-after':     () => h(SidebarProgress),
