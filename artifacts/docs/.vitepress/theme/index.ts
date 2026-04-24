@@ -8,6 +8,7 @@ import DomainChecklist from './DomainChecklist.vue'
 import MarkDone from './MarkDone.vue'
 import ProgressWidget from './ProgressWidget.vue'
 import SidebarProgress from './SidebarProgress.vue'
+import CongratulationsModal from './CongratulationsModal.vue'
 import { initProgress } from './useProgress'
 
 export default {
@@ -19,6 +20,7 @@ export default {
       'doc-before': () => h(MarkDone),
       'home-features-after': () => h(ProgressWidget),
       'sidebar-nav-after': () => h(SidebarProgress),
+      'layout-bottom': () => h(CongratulationsModal),
     })
   },
 
