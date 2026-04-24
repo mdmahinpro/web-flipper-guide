@@ -42,16 +42,15 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
 const themes = [
-  { id: 'teal', label: 'টিল', color: 'linear-gradient(135deg, #0d9488, #06b6d4)' },
-  { id: 'blue', label: 'নীল', color: 'linear-gradient(135deg, #0369a1, #0ea5e9)' },
-  { id: 'purple', label: 'বেগুনি', color: 'linear-gradient(135deg, #7c3aed, #a855f7)' },
-  { id: 'amber', label: 'অ্যাম্বার', color: 'linear-gradient(135deg, #d97706, #f59e0b)' },
-  { id: 'emerald', label: 'সবুজ', color: 'linear-gradient(135deg, #059669, #10b981)' },
-  { id: 'rose', label: 'গোলাপি', color: 'linear-gradient(135deg, #e11d48, #f43f5e)' },
+  { id: 'cyan',    label: 'সায়ান',    color: 'linear-gradient(135deg, #00b4d8, #00d4ff)' },
+  { id: 'purple',  label: 'বেগুনি',   color: 'linear-gradient(135deg, #7c3aed, #a855f7)' },
+  { id: 'emerald', label: 'সবুজ',    color: 'linear-gradient(135deg, #059669, #10b981)' },
+  { id: 'amber',   label: 'অ্যাম্বার', color: 'linear-gradient(135deg, #d97706, #f59e0b)' },
+  { id: 'rose',    label: 'গোলাপি',   color: 'linear-gradient(135deg, #e11d48, #f43f5e)' },
 ]
 
 const panelOpen = ref(false)
-const currentTheme = ref('teal')
+const currentTheme = ref('cyan')
 const containerRef = ref<HTMLElement | null>(null)
 
 function applyTheme(themeId: string) {
@@ -62,7 +61,7 @@ function applyTheme(themeId: string) {
 function setTheme(themeId: string) {
   currentTheme.value = themeId
   applyTheme(themeId)
-  try { localStorage.setItem('dfm-theme', themeId) } catch {}
+  try { localStorage.setItem('df-theme', themeId) } catch {}
   panelOpen.value = false
 }
 
@@ -78,7 +77,7 @@ function handleClickOutside(e: MouseEvent) {
 
 onMounted(() => {
   try {
-    const saved = localStorage.getItem('dfm-theme')
+    const saved = localStorage.getItem('df-theme')
     if (saved && themes.find(t => t.id === saved)) {
       currentTheme.value = saved
       applyTheme(saved)

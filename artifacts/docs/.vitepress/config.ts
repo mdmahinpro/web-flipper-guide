@@ -1,23 +1,143 @@
 import { defineConfig } from 'vitepress'
+import { readdirSync, readFileSync, statSync } from 'fs'
+import { resolve, join, basename } from 'path'
+
+const DOCS_ROOT = resolve(import.meta.dirname, '..')
+
+function toTitle(name: string): string {
+  return name
+    .replace(/-/g, ' ')
+    .replace(/\b\w/g, (c) => c.toUpperCase())
+}
+
+function getPageTitle(filePath: string): string {
+  try {
+    const content = readFileSync(filePath, 'utf-8')
+    const fmMatch = content.match(/^---\s*\n[\s\S]*?^title:\s*(.+)$/m)
+    if (fmMatch) return fmMatch[1].trim().replace(/^['"]|['"]$/g, '')
+    const h1Match = content.match(/^#\s+(.+)$/m)
+    if (h1Match) return h1Match[1].trim()
+  } catch {}
+  return toTitle(basename(filePath, '.md'))
+}
+
+function generateSidebarSection(dirName: string) {
+  const dirPath = resolve(DOCS_ROOT, dirName)
+
+  let entries: string[]
+  try {
+    entries = readdirSync(dirPath).filter((f) => f.endsWith('.md'))
+  } catch {
+    return null
+  }
+
+  entries.sort((a, b) => {
+    if (a === 'index.md') return -1
+    if (b === 'index.md') return 1
+    return a.localeCompare(b, undefined, { numeric: true })
+  })
+
+  const items: { text: string; link: string }[] = []
+
+  for (const file of entries) {
+    const slug = file.replace(/\.md$/, '')
+    const filePath = join(dirPath, file)
+    const title = getPageTitle(filePath)
+    const link = slug === 'index' ? `/${dirName}/` : `/${dirName}/${slug}`
+    items.push({ text: title, link })
+  }
+
+  const indexPath = join(dirPath, 'index.md')
+  let sectionText = toTitle(dirName)
+  try {
+    const idxContent = readFileSync(indexPath, 'utf-8')
+    const h1 = idxContent.match(/^#\s+(.+)$/m)
+    if (h1) sectionText = h1[1].trim()
+  } catch {}
+
+  return { text: sectionText, collapsed: false, items }
+}
+
+function generateSidebar() {
+  const sidebar: ReturnType<typeof generateSidebarSection>[] = []
+
+  const PRIORITY_DIRS = ['introduction', 'getting-started']
+  const CHAPTER_PREFIX = 'part-'
+
+  const allEntries = readdirSync(DOCS_ROOT, { withFileTypes: true })
+    .filter(
+      (e) =>
+        e.isDirectory() &&
+        !e.name.startsWith('.') &&
+        e.name !== 'node_modules' &&
+        e.name !== 'public',
+    )
+    .map((e) => e.name)
+
+  for (const dir of PRIORITY_DIRS) {
+    if (allEntries.includes(dir)) {
+      const section = generateSidebarSection(dir)
+      if (section) sidebar.push(section)
+    }
+  }
+
+  const chapterDirs = allEntries
+    .filter((d) => d.startsWith(CHAPTER_PREFIX))
+    .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
+
+  for (const dir of chapterDirs) {
+    const section = generateSidebarSection(dir)
+    if (section) sidebar.push(section)
+  }
+
+  const handled = new Set([...PRIORITY_DIRS, ...chapterDirs])
+  const remaining = allEntries
+    .filter((d) => !handled.has(d))
+    .sort()
+
+  for (const dir of remaining) {
+    const section = generateSidebarSection(dir)
+    if (section) sidebar.push(section)
+  }
+
+  return sidebar
+}
 
 export default defineConfig({
   title: 'ডোমেইন ফ্লিপিং মাস্টারক্লাস',
-  description: 'শূন্য থেকে ডিজিটাল রিয়েল এস্টেট সাম্রাজ্য — একটি সম্পূর্ণ বাংলা গাইডবুক ২০২৬',
+  description: 'বাংলাদেশের প্রথম সম্পূর্ণ ডোমেইন ফ্লিপিং গাইড — ১৭ অধ্যায়, ৬টি পার্ট। ২০২৬ Edition।',
   lang: 'bn',
-  base: '/',
+  cleanUrls: true,
+  lastUpdated: true,
+  appearance: 'dark',
+
+  vite: {
+    server: { allowedHosts: true },
+  },
+
   head: [
     ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
     ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
     [
       'link',
       {
-        href: 'https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&family=Noto+Sans+Bengali:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap',
+        href: 'https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&family=Noto+Sans+Bengali:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap',
         rel: 'stylesheet',
       },
     ],
-    ['meta', { name: 'theme-color', content: '#0d9488' }],
+    ['meta', { name: 'theme-color', content: '#00d4ff' }],
     ['link', { rel: 'icon', href: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🌐</text></svg>' }],
+    [
+      'script',
+      {},
+      `(function(){
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('vitepress-theme-appearance', 'dark');
+        document.documentElement.setAttribute('data-theme', localStorage.getItem('df-theme') || 'cyan');
+      })();`,
+    ],
   ],
+
   themeConfig: {
     siteTitle: '🌐 ডোমেইন মাস্টারক্লাস',
 
@@ -38,77 +158,7 @@ export default defineConfig({
       { text: '📎 পরিশিষ্ট', link: '/appendix/' },
     ],
 
-    sidebar: [
-      {
-        text: '✍️ লেখকের কথা',
-        collapsed: false,
-        items: [{ text: 'ভূমিকা ও পটভূমি', link: '/introduction/' }],
-      },
-      {
-        text: '🔰 পার্ট ১ — ভিত্তি গড়া',
-        collapsed: false,
-        items: [
-          { text: 'পার্ট পরিচিতি', link: '/part-1/' },
-          { text: 'অধ্যায় ১ — ডোমেইন ফ্লিপিং কী?', link: '/part-1/chapter-1' },
-          { text: 'অধ্যায় ২ — Technical Basics', link: '/part-1/chapter-2' },
-          { text: 'অধ্যায় ৩ — মানসিকতা ও বাজেট', link: '/part-1/chapter-3' },
-        ],
-      },
-      {
-        text: '🔍 পার্ট ২ — Domain খোঁজার শিল্প',
-        collapsed: true,
-        items: [
-          { text: 'পার্ট পরিচিতি', link: '/part-2/' },
-          { text: 'অধ্যায় ৪ — ৭টি Golden Rule', link: '/part-2/chapter-4' },
-          { text: 'অধ্যায় ৫ — কোথায় খুঁজবেন', link: '/part-2/chapter-5' },
-          { text: 'অধ্যায় ৬ — Domain Valuation', link: '/part-2/chapter-6' },
-        ],
-      },
-      {
-        text: '💰 পার্ট ৩ — কেনার কৌশল',
-        collapsed: true,
-        items: [
-          { text: 'পার্ট পরিচিতি', link: '/part-3/' },
-          { text: 'অধ্যায় ৭ — Auction কৌশল', link: '/part-3/chapter-7' },
-          { text: 'অধ্যায় ৮ — Expired Domain SEO', link: '/part-3/chapter-8' },
-          { text: 'অধ্যায় ৯ — Flip vs Hold Strategy', link: '/part-3/chapter-9' },
-        ],
-      },
-      {
-        text: '📣 পার্ট ৪ — বিক্রির শিল্প',
-        collapsed: true,
-        items: [
-          { text: 'পার্ট পরিচিতি', link: '/part-4/' },
-          { text: 'অধ্যায় ১০ — Domain Marketplace', link: '/part-4/chapter-10' },
-          { text: 'অধ্যায় ১১ — For Sale Landing Page', link: '/part-4/chapter-11' },
-          { text: 'অধ্যায় ১২ — Negotiation কৌশল', link: '/part-4/chapter-12' },
-        ],
-      },
-      {
-        text: '⚠️ পার্ট ৫ — ঝুঁকি ও আইন',
-        collapsed: true,
-        items: [
-          { text: 'পার্ট পরিচিতি', link: '/part-5/' },
-          { text: 'অধ্যায় ১৩ — সাধারণ ভুলগুলো', link: '/part-5/chapter-13' },
-          { text: 'অধ্যায় ১৪ — Legal ও Tax (বাংলাদেশ)', link: '/part-5/chapter-14' },
-          { text: 'অধ্যায় ১৫ — AI দিয়ে Domain Flipping', link: '/part-5/chapter-15' },
-        ],
-      },
-      {
-        text: '🚀 পার্ট ৬ — স্কেল আপ',
-        collapsed: true,
-        items: [
-          { text: 'পার্ট পরিচিতি', link: '/part-6/' },
-          { text: 'অধ্যায় ১৬ — Portfolio Management', link: '/part-6/chapter-16' },
-          { text: 'অধ্যায় ১৭ — Full Business Roadmap', link: '/part-6/chapter-17' },
-        ],
-      },
-      {
-        text: '📎 পরিশিষ্ট',
-        collapsed: true,
-        items: [{ text: 'সম্পূর্ণ রেফারেন্স সংকলন', link: '/appendix/' }],
-      },
-    ],
+    sidebar: generateSidebar(),
 
     search: {
       provider: 'local',
@@ -139,10 +189,10 @@ export default defineConfig({
   },
 
   markdown: {
-    theme: { light: 'github-light', dark: 'github-dark' },
-    lineNumbers: false,
+    theme: {
+      light: 'github-light',
+      dark: 'one-dark-pro',
+    },
+    lineNumbers: true,
   },
-
-  cleanUrls: true,
-  lastUpdated: true,
 })
