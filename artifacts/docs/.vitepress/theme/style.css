@@ -653,12 +653,35 @@ body {
 .outline-link.active { color: var(--accent) !important; font-weight: 600; }
 
 /* ==================== HERO VISUAL SWAP (desktop mascot vs mobile animation) ==================== */
-.home-hero-visual { width: 100%; }
+.home-hero-visual { width: 100%; display: flex; justify-content: center; align-items: center; }
 .home-hero-desktop { display: block; }
-.home-hero-mobile  { display: none; }
+.home-hero-mobile  { display: none; width: 100%; }
 @media (max-width: 768px) {
   .home-hero-desktop { display: none !important; }
-  .home-hero-mobile  { display: block !important; }
+  .home-hero-mobile  { display: block !important; width: 100% !important; }
+
+  /* Force VitePress hero image slot to span full width and center on mobile */
+  .VPHero .container,
+  .VPHero .main,
+  .VPHero .image,
+  .VPHero .image-container,
+  .VPHero .image-bg,
+  .VPHero .VPImage,
+  .VPHero .VPHeroImage {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: none !important;
+  }
+  .VPHero .image-container {
+    padding: 0 !important;
+  }
+  .VPHero .image-bg {
+    display: none !important;
+  }
 }
 
 /* ==================== HERO IMAGE SLOT (Techely mascot) ==================== */
