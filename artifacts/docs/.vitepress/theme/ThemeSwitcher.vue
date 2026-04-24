@@ -43,6 +43,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 
 const themes = [
   { id: 'teal', label: 'টিল', color: 'linear-gradient(135deg, #0d9488, #06b6d4)' },
+  { id: 'blue', label: 'নীল', color: 'linear-gradient(135deg, #0369a1, #0ea5e9)' },
   { id: 'purple', label: 'বেগুনি', color: 'linear-gradient(135deg, #7c3aed, #a855f7)' },
   { id: 'amber', label: 'অ্যাম্বার', color: 'linear-gradient(135deg, #d97706, #f59e0b)' },
   { id: 'emerald', label: 'সবুজ', color: 'linear-gradient(135deg, #059669, #10b981)' },
