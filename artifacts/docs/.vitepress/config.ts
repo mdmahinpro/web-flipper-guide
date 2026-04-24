@@ -165,11 +165,28 @@ export default defineConfig({
       provider: 'local',
       options: {
         translations: {
-          button: { buttonText: 'খুঁজুন', buttonAriaLabel: 'খুঁজুন' },
+          button: {
+            buttonText: 'খুঁজুন',
+            buttonAriaLabel: 'অধ্যায় খুঁজুন',
+          },
           modal: {
-            noResultsText: 'কোনো ফলাফল পাওয়া যায়নি',
-            resetButtonTitle: 'পরিষ্কার করুন',
-            footer: { selectText: 'নির্বাচন', navigateText: 'নেভিগেট' },
+            displayDetails: 'বিস্তারিত তালিকা দেখুন',
+            resetButtonTitle: 'অনুসন্ধান মুছুন',
+            backButtonTitle: 'অনুসন্ধান বন্ধ করুন',
+            noResultsText: 'কোনো ফলাফল পাওয়া যায়নি:',
+            footer: {
+              selectText: 'নির্বাচন করতে',
+              navigateText: 'নেভিগেট করতে',
+              closeText: 'বন্ধ করতে',
+              closeKeyAriaLabel: 'Escape',
+            },
+          },
+        },
+        miniSearch: {
+          searchOptions: {
+            fuzzy: 0.2,
+            prefix: true,
+            boost: { title: 4, text: 2, titles: 1 },
           },
         },
       },
