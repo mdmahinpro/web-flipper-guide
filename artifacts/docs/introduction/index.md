@@ -1,28 +1,59 @@
-# Introduction
+---
+title: লেখকের কথা — ভূমিকা
+---
 
-Welcome to this documentation. This guide is structured into chapters and sections so you can read it from start to finish, or jump directly to the topic you need.
+# ✍️ লেখকের কথা / ভূমিকা
 
-## What You'll Learn
+২০১০ সাল। আমেরিকার একজন সাধারণ মানুষ — Mike Mann — একটা রাতে বসে ৭০,০০০ ডলার খরচ করে **14,962টি domain** কিনলেন। মাত্র একটি রাতে।
 
-This documentation covers everything from the basics to advanced topics. Each chapter builds upon the previous one, creating a comprehensive learning path.
+পরের কয়েক বছরে সেই domains বিক্রি হলো কোটি কোটি টাকায়।
 
-::: tip Getting the most out of this guide
-Use the **search** (press `/` or `Ctrl+K`) to quickly find any topic. The **table of contents** on the right side of each page helps you navigate within a chapter.
-:::
+এটা কোনো সিনেমার গল্প না। এটা domain investing-এর দুনিয়ায় একটা সত্যিকারের কিংবদন্তি।
 
-## How It's Organized
+কিন্তু এই বইটা Mike Mann-এর মতো রাতারাতি কোটিপতি হওয়ার গল্প না।
 
-| Section | Description |
-|---|---|
-| Introduction | This section — overview and how to use the guide |
-| Chapter 1 | Foundations and core basics |
-| Chapter 2 | Core concepts and deeper principles |
-| Chapter 3 | Advanced topics and techniques |
+এই বইটা **আপনার** গল্প — যিনি হয়তো এখন বাংলাদেশে বসে আছেন, হাতে হয়তো মাত্র ৫০০-১০০০ টাকা আছে, কিন্তু মাথায় একটাই প্রশ্ন:
 
-## Before You Begin
+> *"আমি কি সত্যিই ডোমেইন ফ্লিপিং করে আয় করতে পারব?"*
 
-Before diving in, make sure you have read the **Overview** page which gives you a high-level picture of everything covered in this documentation.
+উত্তর হলো — **হ্যাঁ, পারবেন।** তবে সঠিক জ্ঞান ছাড়া না।
 
-## Next Steps
+---
 
-Continue to the [Overview →](./overview) or jump straight to [Chapter 1](/chapter-1/).
+## কেন এই বই?
+
+ইন্টারনেটে domain flipping নিয়ে অনেক content আছে — কিন্তু সেগুলো বেশিরভাগই ইংরেজিতে, আমেরিকান বাজারের কথা মাথায় রেখে লেখা, এবং বাংলাদেশের বাস্তবতার সাথে মেলে না।
+
+এই বইটা লেখা হয়েছে **২০২৬ সালের বাজার বিশ্লেষণ** এবং **বাংলাদেশের প্রেক্ষাপট** মাথায় রেখে।
+
+এখানে পাবেন:
+
+- Real case studies এবং সংখ্যা
+- ধাপে ধাপে কাজ করার পদ্ধতি
+- বাংলাদেশ থেকে আন্তর্জাতিক payment নেওয়ার উপায়
+- কোথায় ভুল করলে টাকা হারাবেন — সেই সতর্কবার্তা
+- এবং সবচেয়ে গুরুত্বপূর্ণ: **সঠিক মানসিকতা**
+
+---
+
+## বইটা পড়ার সময় একটা কথা মনে রাখবেন
+
+> 🏠 *"Domain flipping হলো জমি কেনাবেচার মতো — তবে সেটা ইন্টারনেটের জমি। আর ইন্টারনেটের জমি কখনো শেষ হয় না।"*
+
+---
+
+## বইয়ের গঠন
+
+| পার্ট | বিষয় | অধ্যায় |
+|-------|-------|---------|
+| পার্ট ১ | ভিত্তি গড়া | ১, ২, ৩ |
+| পার্ট ২ | Domain খোঁজার শিল্প | ৪, ৫, ৬ |
+| পার্ট ৩ | কেনার কৌশল | ৭, ৮, ৯ |
+| পার্ট ৪ | বিক্রির শিল্প | ১০, ১১, ১২ |
+| পার্ট ৫ | ঝুঁকি ও আইন | ১৩, ১৪, ১৫ |
+| পার্ট ৬ | স্কেল আপ | ১৬, ১৭ |
+| পরিশিষ্ট | রেফারেন্স ও tools | A–E |
+
+---
+
+চলুন শুরু করা যাক। 🚀
