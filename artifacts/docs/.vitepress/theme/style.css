@@ -420,35 +420,164 @@ body {
   font-size: 0.875em;
 }
 
-/* ==================== TABLES ==================== */
+/* ==================== TABLES (mobile-first, scrollable) ==================== */
+/* VitePress wraps tables, but we make the table itself scrollable on small screens */
 .vp-doc table {
   width: 100%;
   border-radius: 12px;
-  overflow: hidden;
   border: 1px solid var(--vp-c-border);
   border-collapse: separate;
   border-spacing: 0;
-  font-size: 0.93rem;
+  font-size: 0.92rem;
   margin: 1.5rem 0;
+  overflow: hidden;
+  table-layout: auto;
 }
 .vp-doc th {
   background: var(--accent-soft);
   color: var(--accent);
   font-weight: 700;
-  padding: 12px 16px;
+  padding: 12px 14px;
   text-align: left;
   border-bottom: 2px solid var(--accent-glow);
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   letter-spacing: 0.02em;
   text-transform: uppercase;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
 }
 .vp-doc td {
-  padding: 10px 16px;
+  padding: 10px 14px;
   border-bottom: 1px solid var(--vp-c-border);
   color: var(--vp-c-text-2);
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+  vertical-align: top;
 }
 .vp-doc tr:last-child td { border-bottom: none; }
 .vp-doc tr:hover td { background: var(--accent-soft); }
+
+/* Mobile: horizontal scroll fallback for very wide tables, smaller text */
+@media (max-width: 768px) {
+  .vp-doc table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: normal;
+    font-size: 0.82rem;
+    border-radius: 10px;
+  }
+  .vp-doc th, .vp-doc td {
+    padding: 8px 10px;
+    min-width: 80px;
+  }
+  .vp-doc th {
+    font-size: 0.7rem;
+    letter-spacing: 0.01em;
+  }
+  /* Visual hint that the table can scroll */
+  .vp-doc table::-webkit-scrollbar { height: 6px; }
+  .vp-doc table::-webkit-scrollbar-thumb {
+    background: var(--accent-glow);
+    border-radius: 3px;
+  }
+}
+
+/* ==================== FLOW STEPS (home page "What you'll learn") ==================== */
+.flow-diagram {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 2rem 0;
+  position: relative;
+}
+.flow-step {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 22px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.flow-step::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+  opacity: 0.85;
+}
+.flow-step:hover {
+  transform: translateX(4px);
+  border-color: var(--accent);
+  box-shadow: 0 8px 26px var(--accent-glow);
+}
+.flow-step-num {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.25rem;
+  font-family: var(--vp-font-family-mono);
+  box-shadow: 0 6px 16px var(--accent-glow);
+  position: relative;
+  z-index: 1;
+}
+.flow-step-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+.flow-step-content strong {
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--vp-c-text-1);
+  line-height: 1.4;
+}
+.flow-step-content span {
+  font-size: 0.88rem;
+  color: var(--vp-c-text-2);
+  line-height: 1.55;
+}
+.flow-arrow {
+  text-align: center;
+  font-size: 1.4rem;
+  color: var(--accent);
+  opacity: 0.6;
+  margin: -4px 0 -4px 24px;
+  font-weight: 700;
+  user-select: none;
+}
+
+@media (max-width: 600px) {
+  .flow-step {
+    padding: 14px 16px 14px 18px;
+    gap: 12px;
+    border-radius: 14px;
+  }
+  .flow-step-num {
+    width: 40px;
+    height: 40px;
+    font-size: 1.05rem;
+  }
+  .flow-step-content strong { font-size: 0.95rem; }
+  .flow-step-content span   { font-size: 0.82rem; }
+  .flow-arrow { font-size: 1.2rem; margin-left: 18px; }
+}
 
 /* ==================== BLOCKQUOTE / CALLOUTS ==================== */
 .vp-doc blockquote {
@@ -687,7 +816,18 @@ body {
 
 /* ==================== MOBILE ==================== */
 @media (max-width: 960px) {
-  .VPHero { padding: 56px 20px 36px !important; }
+  /* Push hero down so mascot (which goes ABOVE text on mobile) clears navbar */
+  .VPHero { padding: 88px 20px 36px !important; }
+  .VPHero .container { gap: 12px !important; }
+  .VPHero .image {
+    margin-bottom: 8px !important;
+    padding: 0 !important;
+  }
+  .VPHero .image-container {
+    transform: none !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+  }
   .VPHero .name { font-size: clamp(1.85rem, 7vw, 2.4rem) !important; }
   .VPHero .text { font-size: 1rem !important; }
   .VPHero .tagline { font-size: 0.95rem !important; }

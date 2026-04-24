@@ -2,7 +2,7 @@
   <!-- LAYER 1: outer hover scale -->
   <div
     class="techely-hover"
-    :style="{ width: size + 'px', height: height + 'px' }"
+    :style="{ width: effectiveSize + 'px', height: height + 'px' }"
   >
     <!-- LAYER 2: continuous float bob (CSS animation, isolated transform) -->
     <div class="techely-float">
@@ -68,11 +68,21 @@ const BODY_URL =
 
 const props = withDefaults(defineProps<{ size?: number }>(), { size: 160 })
 
-const height       = computed(() => Math.round(props.size * (592 / 500)))
-const socketR      = computed(() => (12 / 500) * props.size)
+// Responsive size: shrink on smaller screens so mascot fits mobile hero
+const effectiveSize = ref(props.size)
+function updateEffectiveSize() {
+  if (typeof window === 'undefined') return
+  const w = window.innerWidth
+  if (w < 480)      effectiveSize.value = Math.min(props.size, 130)
+  else if (w < 768) effectiveSize.value = Math.min(props.size, 150)
+  else              effectiveSize.value = props.size
+}
+
+const height       = computed(() => Math.round(effectiveSize.value * (592 / 500)))
+const socketR      = computed(() => (12 / 500) * effectiveSize.value)
 const pupilR       = computed(() => socketR.value * 0.68)
 const pupilD       = computed(() => pupilR.value * 2)
-const particleSize = computed(() => Math.max(5, props.size * 0.045))
+const particleSize = computed(() => Math.max(5, effectiveSize.value * 0.045))
 
 const eyes = [
   { id: 'left',  xPct: 38.40, yPct: 23.99 },
@@ -199,12 +209,15 @@ function onMouseMove(e: MouseEvent) {
 
 onMounted(() => {
   if (typeof window === 'undefined') return
+  updateEffectiveSize()
   window.addEventListener('mousemove', onMouseMove, { passive: true })
+  window.addEventListener('resize', updateEffectiveSize, { passive: true })
   rafId = requestAnimationFrame(tick)
 })
 onUnmounted(() => {
   if (typeof window === 'undefined') return
   window.removeEventListener('mousemove', onMouseMove)
+  window.removeEventListener('resize', updateEffectiveSize)
   cancelAnimationFrame(rafId)
 })
 </script>
