@@ -5,6 +5,10 @@ import ThemeSwitcher from './ThemeSwitcher.vue'
 import ProfitCalculator from './ProfitCalculator.vue'
 import DomainStats from './DomainStats.vue'
 import DomainChecklist from './DomainChecklist.vue'
+import MarkDone from './MarkDone.vue'
+import ProgressWidget from './ProgressWidget.vue'
+import SidebarProgress from './SidebarProgress.vue'
+import { initProgress } from './useProgress'
 
 export default {
   extends: DefaultTheme,
@@ -12,6 +16,9 @@ export default {
   Layout() {
     return h(DefaultTheme.Layout, null, {
       'nav-bar-content-after': () => h(ThemeSwitcher),
+      'doc-before': () => h(MarkDone),
+      'home-features-after': () => h(ProgressWidget),
+      'sidebar-nav-after': () => h(SidebarProgress),
     })
   },
 
@@ -23,6 +30,7 @@ export default {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('df-theme') || 'cyan'
       document.documentElement.setAttribute('data-theme', saved)
+      initProgress()
     }
   },
 }
