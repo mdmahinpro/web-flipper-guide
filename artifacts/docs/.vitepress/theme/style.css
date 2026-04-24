@@ -1010,8 +1010,85 @@ body {
   min-width: 0;
 }
 
+.progress-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
 .progress-percent {
   font-size: 0.8rem;
   color: var(--vp-c-text-2);
-  text-align: right;
+}
+
+.reset-area {
+  display: flex;
+  align-items: center;
+}
+
+.reset-btn {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--vp-c-text-3);
+  cursor: pointer;
+  background: none;
+  border: none;
+  border-bottom: 1px dashed transparent;
+  padding: 0;
+  font-family: inherit;
+  transition: color 0.2s, border-color 0.2s;
+  user-select: none;
+}
+
+.reset-btn:hover {
+  color: #ef4444;
+  border-bottom-color: #ef4444;
+}
+
+.reset-confirm {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.reset-confirm-text {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--vp-c-text-2);
+}
+
+.reset-confirm-btn {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  line-height: 1.5;
+}
+
+.reset-confirm-yes {
+  background: rgba(239, 68, 68, 0.12);
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.35);
+}
+
+.reset-confirm-yes:hover {
+  background: #ef4444;
+  color: #fff;
+}
+
+.reset-confirm-no {
+  background: var(--vp-c-bg-mute);
+  color: var(--vp-c-text-2);
+  border-color: var(--vp-c-border);
+}
+
+.reset-confirm-no:hover {
+  border-color: var(--accent);
+  color: var(--accent);
 }

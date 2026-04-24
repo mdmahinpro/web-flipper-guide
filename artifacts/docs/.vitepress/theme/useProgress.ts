@@ -55,7 +55,14 @@ export function useProgress() {
     window.dispatchEvent(new Event('df-progress-change'))
   }
 
-  return { completed, completedCount, totalChapters, percent, isCompleted, toggle }
+  function resetProgress() {
+    const empty = new Set<string>()
+    completed.value = empty
+    saveCompleted(empty)
+    window.dispatchEvent(new Event('df-progress-change'))
+  }
+
+  return { completed, completedCount, totalChapters, percent, isCompleted, toggle, resetProgress }
 }
 
 export function normalizePath(path: string): string {
