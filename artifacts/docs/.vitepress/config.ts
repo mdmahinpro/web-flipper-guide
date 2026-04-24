@@ -140,7 +140,7 @@ export default defineConfig({
 
   themeConfig: {
     logo: '/logo.svg',
-    siteTitle: '🌐 ডোমেইন মাস্টারক্লাস',
+    siteTitle: 'ডোমেইন মাস্টারক্লাস',
 
     nav: [
       { text: '🏠 হোম', link: '/' },
