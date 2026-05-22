@@ -104,6 +104,7 @@ function generateSidebar() {
 }
 
 export default defineConfig({
+  base: '/web-flipper-guide/',
   title: 'ডোমেইন ফ্লিপিং মাস্টারক্লাস',
   description: 'বাংলাদেশের প্রথম সম্পূর্ণ ডোমেইন ফ্লিপিং গাইড — ১৭ অধ্যায়, ৬টি পার্ট। ২০২৬ Edition।',
   lang: 'bn',
