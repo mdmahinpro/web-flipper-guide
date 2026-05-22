@@ -1,6 +1,6 @@
 {
   "buildCommand": "pnpm --filter @workspace/docs run build",
-  "outputDirectory": "artifacts/docs/.vitepress/dist",
+  "outputDirectory": "dist",
   "installCommand": "pnpm install",
   "framework": null
 }
